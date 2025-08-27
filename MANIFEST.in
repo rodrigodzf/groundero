@@ -1,0 +1,5 @@
+# Include additional files in the package distribution
+include .env.example
+include README.md
+include LICENSE
+recursive-include groundero *.py

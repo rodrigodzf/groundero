@@ -1,0 +1,62 @@
+[project]
+name = "groundero"
+version = "0.1.0"
+description = "Visual grounding search for academic papers with Zotero integration"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Rodrigo Diaz", email = "rodrigodzf@gmail.com"}
+]
+keywords = ["visual-grounding", "pdf", "zotero", "academic-search", "docling", "langchain", "ai", "research"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Indexing",
+]
+license = {text = "MIT"}
+dependencies = [
+    "docling>=2.47.0",
+    "ipykernel>=6.30.1",
+    "langchain>=0.3.27",
+    "langchain-core>=0.3.74",
+    "langchain-docling>=1.0.0",
+    "langchain-google-genai>=2.1.9",
+    "langchain-huggingface>=0.3.1",
+    "langchain-milvus>=0.2.1",
+    "platformdirs>=4.3.8",
+    "python-dotenv>=1.1.1",
+    "pyzotero>=1.6.11",
+    "rich>=14.1.0",
+    "sentence-transformers>=5.1.0",
+    "sqlmodel>=0.0.24",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "ty>=0.0.1a19"
+]
+
+[project.urls]
+Homepage = "https://github.com/rodrigodzf/groundero"
+Repository = "https://github.com/rodrigodzf/groundero.git"
+Documentation = "https://github.com/rodrigodzf/groundero#readme"
+Issues = "https://github.com/rodrigodzf/groundero/issues"
+
+[project.scripts]
+groundero = "groundero:main"
+groundero-install = "groundero.install:main"

@@ -1,0 +1,108 @@
+# Legacy code and experimental files
+legacy/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+semantic_search.log
+
+# Data directories (but keep structure)
+data/embeddings/*/
+data/visual_grounding_db/
+data/doc_store/*.json
+data/pdfs/*.pdf
+data/zotero_metadata.json
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Package managers
+node_modules/
+.yarn/
+.pnp.*
+
+# Ruff cache
+.ruff_cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Claude Code specific
+.claude/
+
+# Backup files
+*.bak
+*.backup
+*.db

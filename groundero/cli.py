@@ -251,7 +251,7 @@ def update_command(limit=None, reset=False):
         os._exit(1)
 
 
-def query_command(question=None):
+def query_command(question=None, top_k=3, db_path=None):
     """Run query mode."""
     # Display database status first
     db_ready = display_database_status()
@@ -276,16 +276,30 @@ def query_command(question=None):
     try:
         if question:
             # Single query mode
-            result = run_query(question)
-            if result["success"]:
-                from .groundero_core import (
-                    display_answer,
-                    display_sources_table,
-                    display_visual_grounding_info,
-                    load_document_store,
-                )
 
-                doc_store = load_document_store()
+            from .groundero_core import (
+                display_answer,
+                display_sources_table,
+                display_visual_grounding_info,
+                load_document_store,
+                get_vector_db_path,
+                load_vectorstore,
+                DatabaseNotFoundError,
+            )
+
+            if db_path is None:
+                db_path = get_vector_db_path()
+
+            # Load databases once
+            vectorstore = load_vectorstore(db_path)
+            if not vectorstore:
+                raise DatabaseNotFoundError("Vector database could not be loaded")
+
+            doc_store = load_document_store()
+
+            result = run_query(vectorstore, doc_store, question, top_k=top_k)
+            if result["success"]:
+
                 display_answer(question, result["answer"])
                 display_sources_table(result["context"], doc_store)
                 display_visual_grounding_info(result["context"], doc_store)
@@ -401,6 +415,11 @@ For more information: https://github.com/rodrigodzf/groundero
         default=3,
         help="Number of source documents to retrieve (default: 3)",
     )
+    query_parser.add_argument(
+        "--db-path",
+        type=str,
+        help="Path to the vector database (optional, defaults to config path)",
+    )
 
     # List command
     subparsers.add_parser(
@@ -426,7 +445,7 @@ For more information: https://github.com/rodrigodzf/groundero
         elif args.command == "update":
             update_command(limit=args.limit, reset=args.reset)
         elif args.command == "query":
-            query_command(args.question)
+            query_command(args.question, top_k=args.top_k, db_path=args.db_path)
         elif args.command == "list":
             list_command()
         elif args.command == "status":
